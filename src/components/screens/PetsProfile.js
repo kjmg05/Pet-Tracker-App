@@ -6,13 +6,18 @@ import theme from "../../theme";
 
 const { width, height } = Dimensions.get("screen");
 
-const Signin = ({ navigation }) => {
+export const PetsProfile_newUser = ({navigation}) => {
     return(
         <SafeAreaView>
-            <Text>Sign in</Text>
+            <Text>Pets profiles new user</Text>
         </SafeAreaView>
     );
-
 };
 
-export default Signin;
+export const PetsProfile_user = ({ navigation }) => {
+    return(
+        <SafeAreaView>
+            <Text>Pets profiles</Text>
+        </SafeAreaView>
+    );
+};

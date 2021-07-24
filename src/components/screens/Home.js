@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import { StyleSheet, View, SafeAreaView, ScrollView, Modal, Dimensions } from "react-native";
+import { StyleSheet, View, SafeAreaView, ScrollView, Modal, Dimensions, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import theme from "../../theme";
 
 const { width, height } = Dimensions.get("screen");
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
     return (
@@ -20,6 +20,7 @@ const Home = () => {
               onPress={() => setModalOpen(true)}
               color="#fff"
             />
+            {/* Aqui va la imagen de la app */}
             <Modal visible={modalOpen}>
               <SafeAreaView style={styles.modal}>
                 <MaterialIcons
@@ -44,7 +45,22 @@ const Home = () => {
               </SafeAreaView>
             </Modal>
 
-
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Signin");
+              }}
+              style={styles.buttonLogin}
+            >
+              <Text style={styles.text}>Log in</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Signup");
+              }}
+              style={styles.buttonSignin}
+            >
+              <Text style={styles.text}>Sign up</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
 
@@ -60,6 +76,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 50,
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 20,
+    color: theme.colors.dark,
   },
   infoIcon: {
     marginTop: 30,
@@ -105,6 +126,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: theme.colors.dark,
     fontSize: 18,
+  },
+  buttonLogin: {
+    width: 300,
+    height: 50,
+    backgroundColor: theme.colors.lightBlue,
+    borderRadius: 5,
+    elevation: 15,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonSignin: {
+    width: 300,
+    height: 50,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: theme.colors.darkBlue,
+    elevation: 15,
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
