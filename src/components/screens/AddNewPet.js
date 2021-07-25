@@ -8,7 +8,6 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  Button,
 } from "react-native";
 import theme from "../../theme";
 
