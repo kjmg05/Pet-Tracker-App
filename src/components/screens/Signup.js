@@ -12,7 +12,6 @@ const Signup = ({ navigation }) => {
             <Text>Sign up</Text>
         </SafeAreaView>
     );
-
 };
 
 export default Signup;

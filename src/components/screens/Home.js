@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
 
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("Signin");
+                navigation.navigate("PetsProfile_newUser");
               }}
               style={styles.buttonLogin}
             >
