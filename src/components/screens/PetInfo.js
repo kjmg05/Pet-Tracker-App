@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -7,27 +7,133 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator
 } from "react-native";
 import theme from "../../theme";
+import firebase from "../database/firebase";
 
 const { width, height } = Dimensions.get("screen");
 
-const PetInfo = ({ navigation }) => {
-  return (
-    <SafeAreaView>
-      <View style={styles.body}>
-        <Text style={styles.textTitle}>🐾 My Pet Information 🐾</Text>
-        <Text style={styles.textTitle}>Solovino</Text>
-        <TextInput style={styles.input} editable={false} value="Terrier" />
-        <TextInput style={styles.input} editable={false} value="5 yrs" />
-        <TextInput style={styles.input} editable={false} value="11 kg" />
-        <TouchableOpacity onPress={() => {}} style={styles.buttonAdd}>
-          <Text>Edit my pet 🐾</Text>
-          {/* No se como hacer que los text input se vuelvan editable de nuevo */}
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
+const PetInfo = ({ navigation, route}) => {
+  const petId = route.params.petId;
+  const [pet, setPet] = useState({
+    id: '',
+    petName: '',
+    petBreed: '',
+    petAge: '',
+    petWeight: '',
+  });
+
+  const [loading, setLoading] = useState(true);
+
+  // console.log(petId);
+
+  
+
+  const getPetById = async (id) => {
+    const dbRef = firebase.db.collection('pets').doc(id);
+    const petData = await dbRef.get();
+    const pet = petData.data();
+    // console.log(pet);
+    setPet({
+      ...pet,
+      id: petData,
+    });
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getPetById(petId);
+  });
+
+  const handleChangeText = (input, value) => {
+    setState({...state, [input]: value})
+  }
+
+  const popUp = () => {
+    Alert.alert("Pet Tracker App", "Pet added to your pet list!", [
+      {
+        text: "OK",
+        onPress: () => 
+          navigation.navigate("PetsProfile_user"),
+            // onChangeAge(""),
+            // onChangeText(""),
+            // onChangeWeight("");
+      },
+    ]);
+  };
+
+  //database
+  const addNew = () => {
+    
+      Alert.alert("Pet Tracker App", "Please, provide your pet name", [
+        {
+          text: "OK",
+        },
+      ]);
+    
+      popUp();
+    
+  };
+
+  if(loading){
+    return(
+      <View>
+<ActivityIndicator size="large" color="#0000ff" />
+    </View>
+    );
+  }
+  else{
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.body}>
+          <Text style={styles.textTitle}>🐾 My pet information 🐾</Text>
+          <TextInput
+            style={styles.input}
+            value={pet.petName}
+            onChangeText={(value) => handleChangeText('petName', value)}
+            keyboardType="default"
+          />
+          <TextInput
+            style={styles.input}
+            value={pet.petBreed}
+            onChangeText={(value) => handleChangeText('petBreed', value)}
+            keyboardType="default"
+          />
+          <TextInput
+            style={styles.input}
+            value={`${pet.petAge} years`}
+            onChangeText={(value) => handleChangeText('petAge', value)}
+            keyboardType="number-pad"
+          />
+          <TextInput
+            style={styles.input}
+            value={`${pet.petWeight} kg`}
+            onChangeText={(value) => handleChangeText('petWeight', value)}
+            keyboardType="decimal-pad"
+          />
+          <TouchableOpacity
+            onPress={() => {
+              
+            }}
+            style={styles.buttonAdd}
+          >
+            <Text>Update pet 🐾</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              
+            }}
+            style={styles.buttonAdd}
+          >
+            <Text>Delete pet 🐾</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  
 };
 
 const styles = StyleSheet.create({

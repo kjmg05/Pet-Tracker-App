@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -6,9 +6,12 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { ListItem, Avatar } from "react-native-elements";
 import theme from "../../theme";
+import firebase from "../database/firebase";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -31,37 +34,96 @@ export const PetsProfile_newUser = ({ navigation }) => {
 };
 
 export const PetsProfile_user = ({ navigation }) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.body}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("AddNewPet");
-          }}
-          style={styles.buttonAdd}
-        >
-          <Text style={styles.text}>Add new pet 🐾</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("PetInfo");
-          }}
-          style={styles.buttonAdd}
-        >
-          <Text style={styles.text}>
-            Aqui lo demas del listado de mascotas que abre pet info
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
+  const [pets, setPets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    firebase.db.collection('pets').onSnapshot(querySnapshot => {
+      const pets = [];
+      querySnapshot.docs.forEach(doc => {
+        
+        const {petName, petBreed, petAge, petWeight} = doc.data();
+        pets.push({
+          id: doc.id,
+          petName, 
+          petBreed, 
+          petAge, 
+          petWeight,
+        });
+      });
+      // console.log(pets);
+    setPets(pets);
+    setLoading(false);
+    });
+  }, [])
+
+  if(loading){
+    return(
+      <View>
+        <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+    );
+  }
+  else{
+    return (
+        <View style={styles.body}>
+        <ScrollView>  
+            <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("AddNewPet");
+            }}
+            style={styles.buttonAdd}
+          >
+            <Text style={styles.text}>Add new pet 🐾</Text>
+          </TouchableOpacity>
+          {
+            pets.map(pet => {
+              return(
+                <ListItem key={pet.id} 
+                  bottomDivider 
+                  onPress={() => {
+                    navigation.navigate("PetInfo", {
+                      petId: pet.id,
+                    });
+                  }}
+                >
+                  <Avatar source={{uri: "https://i0.wp.com/loyalty.dog/wp-content/uploads/2016/12/Paw-transparent-1024.png"}}/>
+                  <ListItem.Content>
+                    
+                    <ListItem.Title>{pet.petName}</ListItem.Title>
+                    <ListItem.Subtitle>Breed: {pet.petBreed}</ListItem.Subtitle>
+                    <ListItem.Subtitle>Age: {pet.petAge}</ListItem.Subtitle>
+                    <ListItem.Subtitle>Weight (kg.): {pet.petWeight}</ListItem.Subtitle>
+                  </ListItem.Content>
+                  <ListItem.Chevron/>
+                </ListItem>
+              )
+            })
+          }
+          {/* <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("PetInfo");
+            }}
+            style={styles.buttonAdd}
+          >
+            {}
+          </TouchableOpacity> */}
+          
+          </ScrollView>
+        </View>
+      
+    );
+  }
+
+  
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+   
   },
-  body: {
+  body: { 
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 50,

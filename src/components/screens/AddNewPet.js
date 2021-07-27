@@ -10,6 +10,7 @@ import {
   TextInput,
 } from "react-native";
 import theme from "../../theme";
+import firebase from "../database/firebase";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -33,23 +34,49 @@ const Buttons = () => {
 };
 
 const AddNewPet = ({ navigation }) => {
-  const [text, onChangeText] = useState(null);
-  const [name, onChangeName] = useState(null);
-  const [age, onChangeAge] = useState(null);
-  const [weight, onChangeWeight] = useState(null);
+  const [state, setState] = useState({
+    petName: '',
+    petBreed: '',
+    petAge: '',
+    petWeight: '',
+  });
+
+  const handleChangeText = (input, value) => {
+    setState({...state, [input]: value})
+  }
 
   const popUp = () => {
     Alert.alert("Pet Tracker App", "Pet added to your pet list!", [
       {
         text: "OK",
-        onPress: () => {
+        onPress: () => 
           navigation.navigate("PetsProfile_user"),
-            onChangeAge(""),
-            onChangeText(""),
-            onChangeWeight("");
-        },
+            // onChangeAge(""),
+            // onChangeText(""),
+            // onChangeWeight("");
       },
     ]);
+  };
+
+  //database
+  const addNew = async () => {
+    //Validacion 
+    if(state.petName === ''){
+      Alert.alert("Pet Tracker App", "Please, provide your pet name", [
+        {
+          text: "OK",
+        },
+      ]);
+    } else{
+      console.log(state);
+      await firebase.db.collection('pets').add({
+        petName: state.petName,
+    petBreed: state.petBreed,
+    petAge: state.petAge,
+    petWeight: state.petWeight,
+      })
+      popUp();
+    }
   };
 
   return (
@@ -60,35 +87,31 @@ const AddNewPet = ({ navigation }) => {
         <Buttons />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeName}
-          value={name}
+          onChangeText={(value) => handleChangeText('petName', value)}
           placeholder="Pet name"
           keyboardType="default"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
+          onChangeText={(value) => handleChangeText('petBreed', value)}
           placeholder="Breed"
           keyboardType="default"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeAge}
-          value={age}
+          onChangeText={(value) => handleChangeText('petAge', value)}
           placeholder="Age"
           keyboardType="number-pad"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeWeight}
-          value={weight}
+          onChangeText={(value) => handleChangeText('petWeight', value)}
           placeholder="Weight (kg.)"
           keyboardType="decimal-pad"
         />
         <TouchableOpacity
           onPress={() => {
-            popUp();
+            addNew();
           }}
           style={styles.buttonAdd}
         >
