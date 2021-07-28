@@ -40,13 +40,16 @@ const Home = ({ navigation }) => {
               <View>
                 <Text style={styles.modalTitle}>Pet Tracker App</Text>
                 <Text style={styles.modalText}>
-                  Is a pet health tracking app designed to help pet owners take
+                  Is a pet tracking app designed to help pet owners take
                   the best care of their furry friend. Simply upload data of a
-                  pet as the breed, pet's weight, feeding schedule, and exercise
-                  activities and the app will provide a dashboard to track and
+                  pet as its name, the breed, pet's weight and pet's age, and the app will provide a dashboard to track and
                   display. We'll also help owner's go paperless to organize a
                   pet's records. Pet Tracker App is the perfect tool for pet
-                  owner's to organize and track their pet's info all in one app.
+                  owner's to organize and track their pet's info all in one app. {"\n"} {"\n"}
+                  Here is some important information: {"\n"} {"\n"}
+                  Most common pets are dogs, cats and birds, but you can also register any kind of pet you have. {"\n"} {"\n"}
+                  Your pet age can be in years or months. {"\n"} {"\n"}
+                  Your pet age has to be in kilograms. {"\n"} {"\n"}
                 </Text>
                 <Text style={styles.modalFooter}>DESING AND DEVELOP BY</Text>
                 <Text style={styles.modalFooterText}>

@@ -17,64 +17,51 @@ const { width, height } = Dimensions.get("screen");
 const Buttons = () => {
   return (
     <View style={styles.petButton}>
-      <TouchableOpacity
-        onPress={() => (backgroundColor = "#00ADB5")}
-        style={styles.button}
-      >
-        <Text>Dog</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}} style={styles.button}>
-        <Text>Cat</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}} style={styles.button}>
-        <Text>Bird</Text>
-      </TouchableOpacity>
+      <Text style={styles.button}>Dog</Text>
+      <Text style={styles.button}>Cat</Text>
+      <Text style={styles.button}>Bird</Text>
     </View>
   );
 };
 
 const AddNewPet = ({ navigation }) => {
   const [state, setState] = useState({
-    petName: '',
-    petBreed: '',
-    petAge: '',
-    petWeight: '',
+    petName: "",
+    petBreed: "",
+    petAge: "",
+    petWeight: "",
   });
 
   const handleChangeText = (input, value) => {
-    setState({...state, [input]: value})
-  }
+    setState({ ...state, [input]: value });
+  };
 
   const popUp = () => {
     Alert.alert("Pet Tracker App", "Pet added to your pet list!", [
       {
         text: "OK",
-        onPress: () => 
-          navigation.navigate("PetsProfile_user"),
-            // onChangeAge(""),
-            // onChangeText(""),
-            // onChangeWeight("");
+        onPress: () => navigation.navigate("PetsProfile_user"),
       },
     ]);
   };
 
   //database
   const addNew = async () => {
-    //Validacion 
-    if(state.petName === ''){
+    //Validacion
+    if (state.petName === "") {
       Alert.alert("Pet Tracker App", "Please, provide your pet name", [
         {
           text: "OK",
         },
       ]);
-    } else{
+    } else {
       console.log(state);
-      await firebase.db.collection('pets').add({
+      await firebase.db.collection("pets").add({
         petName: state.petName,
-    petBreed: state.petBreed,
-    petAge: state.petAge,
-    petWeight: state.petWeight,
-      })
+        petBreed: state.petBreed,
+        petAge: state.petAge,
+        petWeight: state.petWeight,
+      });
       popUp();
     }
   };
@@ -83,29 +70,30 @@ const AddNewPet = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
         <Text style={styles.textTitle}>🐾 Add new pet 🐾</Text>
-        <Text style={styles.text}>My pet is a: </Text>
+        <Text style={styles.text}>My pet breed is a: </Text>
         <Buttons />
+        <Text style={styles.text}>My pet information: </Text>
         <TextInput
           style={styles.input}
-          onChangeText={(value) => handleChangeText('petName', value)}
+          onChangeText={(value) => handleChangeText("petName", value)}
           placeholder="Pet name"
           keyboardType="default"
         />
         <TextInput
           style={styles.input}
-          onChangeText={(value) => handleChangeText('petBreed', value)}
+          onChangeText={(value) => handleChangeText("petBreed", value)}
           placeholder="Breed"
           keyboardType="default"
         />
         <TextInput
           style={styles.input}
-          onChangeText={(value) => handleChangeText('petAge', value)}
+          onChangeText={(value) => handleChangeText("petAge", value)}
           placeholder="Age"
           keyboardType="number-pad"
         />
         <TextInput
           style={styles.input}
-          onChangeText={(value) => handleChangeText('petWeight', value)}
+          onChangeText={(value) => handleChangeText("petWeight", value)}
           placeholder="Weight (kg.)"
           keyboardType="decimal-pad"
         />

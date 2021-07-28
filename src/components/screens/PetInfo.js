@@ -7,31 +7,30 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 import theme from "../../theme";
 import firebase from "../database/firebase";
 
 const { width, height } = Dimensions.get("screen");
 
-const PetInfo = ({ navigation, route}) => {
+const PetInfo = ({ navigation, route }) => {
+  const initialState = {
+    id: "",
+    petName: "",
+    petBreed: "",
+    petAge: "",
+    petWeight: "",
+  };
   const petId = route.params.petId;
-  const [pet, setPet] = useState({
-    id: '',
-    petName: '',
-    petBreed: '',
-    petAge: '',
-    petWeight: '',
-  });
-
+  const [pet, setPet] = useState();
   const [loading, setLoading] = useState(true);
 
   // console.log(petId);
 
-  
-
   const getPetById = async (id) => {
-    const dbRef = firebase.db.collection('pets').doc(id);
+    const dbRef = firebase.db.collection("pets").doc(id);
     const petData = await dbRef.get();
     const pet = petData.data();
     // console.log(pet);
@@ -44,46 +43,72 @@ const PetInfo = ({ navigation, route}) => {
 
   useEffect(() => {
     getPetById(petId);
-  });
+  }, []);
 
   const handleChangeText = (input, value) => {
-    setState({...state, [input]: value})
-  }
-
-  const popUp = () => {
-    Alert.alert("Pet Tracker App", "Pet added to your pet list!", [
-      {
-        text: "OK",
-        onPress: () => 
-          navigation.navigate("PetsProfile_user"),
-            // onChangeAge(""),
-            // onChangeText(""),
-            // onChangeWeight("");
-      },
-    ]);
+    setPet({ ...pet, [input]: value });
   };
 
-  //database
-  const addNew = () => {
-    
-      Alert.alert("Pet Tracker App", "Please, provide your pet name", [
+  const deletePet = async () => {
+    const dbRef = firebase.db.collection("pets").doc(petId);
+    await dbRef.delete();
+  };
+
+  const popUpDelete = () => {
+    Alert.alert(
+      "Pet Tracker App",
+      "Are you sure you want to permanently remove this pet?",
+      [
         {
-          text: "OK",
+          text: "Ok",
+          onPress: () => {
+            deletePet(), navigation.navigate("PetsProfile_user");
+          },
         },
-      ]);
-    
-      popUp();
-    
+        {
+          text: "Cancel",
+          onPress: () => {
+            navigation.navigate("PetsProfile_user");
+          },
+        },
+      ]
+    );
   };
 
-  if(loading){
-    return(
-      <View>
-<ActivityIndicator size="large" color="#0000ff" />
-    </View>
+  const updatePet = async () => {
+    const dbRef = firebase.db.collection("pets").doc(petId);
+    await dbRef.set({
+      petName: pet.petName,
+      petBreed: pet.petBreed,
+      petAge: pet.petAge,
+      petWeight: pet.petWeight,
+    });
+    setPet(initialState);
+    navigation.navigate("PetsProfile_user");
+  };
+
+  const popUpUpdate = () => {
+    Alert.alert(
+      "Pet Tracker App",
+      "Your pet profile has been updated!",
+      [
+        {
+          text: "Ok",
+          onPress: () => {
+            updatePet(), navigation.navigate("PetsProfile_user");
+          },
+        },
+      ]
     );
-  }
-  else{
+  };
+
+  if (loading) {
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  } else {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.body}>
@@ -91,30 +116,34 @@ const PetInfo = ({ navigation, route}) => {
           <TextInput
             style={styles.input}
             value={pet.petName}
-            onChangeText={(value) => handleChangeText('petName', value)}
+            onChangeText={(value) => handleChangeText("petName", value)}
+            placeholder="Pet name"
             keyboardType="default"
           />
           <TextInput
             style={styles.input}
             value={pet.petBreed}
-            onChangeText={(value) => handleChangeText('petBreed', value)}
+            onChangeText={(value) => handleChangeText("petBreed", value)}
+            placeholder="Breed"
             keyboardType="default"
           />
           <TextInput
             style={styles.input}
-            value={`${pet.petAge} years`}
-            onChangeText={(value) => handleChangeText('petAge', value)}
+            value={`${pet.petAge}`}
+            onChangeText={(value) => handleChangeText("petAge", value)}
+            placeholder="Age"
             keyboardType="number-pad"
           />
           <TextInput
             style={styles.input}
-            value={`${pet.petWeight} kg`}
-            onChangeText={(value) => handleChangeText('petWeight', value)}
+            value={`${pet.petWeight}`}
+            onChangeText={(value) => handleChangeText("petWeight", value)}
+            placeholder="Weight"
             keyboardType="decimal-pad"
           />
           <TouchableOpacity
             onPress={() => {
-              
+              popUpUpdate();
             }}
             style={styles.buttonAdd}
           >
@@ -122,7 +151,7 @@ const PetInfo = ({ navigation, route}) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              
+              popUpDelete();
             }}
             style={styles.buttonAdd}
           >
@@ -132,8 +161,6 @@ const PetInfo = ({ navigation, route}) => {
       </SafeAreaView>
     );
   }
-
-  
 };
 
 const styles = StyleSheet.create({

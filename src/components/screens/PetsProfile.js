@@ -7,7 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import theme from "../../theme";
@@ -38,37 +38,35 @@ export const PetsProfile_user = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    firebase.db.collection('pets').onSnapshot(querySnapshot => {
+    firebase.db.collection("pets").onSnapshot((querySnapshot) => {
       const pets = [];
-      querySnapshot.docs.forEach(doc => {
-        
-        const {petName, petBreed, petAge, petWeight} = doc.data();
+      querySnapshot.docs.forEach((doc) => {
+        const { petName, petBreed, petAge, petWeight } = doc.data();
         pets.push({
           id: doc.id,
-          petName, 
-          petBreed, 
-          petAge, 
+          petName,
+          petBreed,
+          petAge,
           petWeight,
         });
       });
       // console.log(pets);
-    setPets(pets);
-    setLoading(false);
+      setPets(pets);
+      setLoading(false);
     });
-  }, [])
+  }, []);
 
-  if(loading){
-    return(
+  if (loading) {
+    return (
       <View>
         <ActivityIndicator size="large" color="#0000ff" />
-    </View>
+      </View>
     );
-  }
-  else{
+  } else {
     return (
-        <View style={styles.body}>
-        <ScrollView>  
-            <TouchableOpacity
+      <View style={styles.body}>
+        <ScrollView>
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate("AddNewPet");
             }}
@@ -76,30 +74,34 @@ export const PetsProfile_user = ({ navigation }) => {
           >
             <Text style={styles.text}>Add new pet 🐾</Text>
           </TouchableOpacity>
-          {
-            pets.map(pet => {
-              return(
-                <ListItem key={pet.id} 
-                  bottomDivider 
-                  onPress={() => {
-                    navigation.navigate("PetInfo", {
-                      petId: pet.id,
-                    });
+          {pets.map((pet) => {
+            return (
+              <ListItem
+                key={pet.id}
+                bottomDivider
+                onPress={() => {
+                  navigation.navigate("PetInfo", {
+                    petId: pet.id,
+                  });
+                }}
+              >
+                <Avatar
+                  source={{
+                    uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/keniaBranch/assets/img/pets.png",
                   }}
-                >
-                  <Avatar source={{uri: "https://i0.wp.com/loyalty.dog/wp-content/uploads/2016/12/Paw-transparent-1024.png"}}/>
-                  <ListItem.Content>
-                    
-                    <ListItem.Title>{pet.petName}</ListItem.Title>
-                    <ListItem.Subtitle>Breed: {pet.petBreed}</ListItem.Subtitle>
-                    <ListItem.Subtitle>Age: {pet.petAge}</ListItem.Subtitle>
-                    <ListItem.Subtitle>Weight (kg.): {pet.petWeight}</ListItem.Subtitle>
-                  </ListItem.Content>
-                  <ListItem.Chevron/>
-                </ListItem>
-              )
-            })
-          }
+                />
+                <ListItem.Content>
+                  <ListItem.Title>{pet.petName}</ListItem.Title>
+                  <ListItem.Subtitle>Breed: {pet.petBreed}</ListItem.Subtitle>
+                  <ListItem.Subtitle>Age: {pet.petAge}</ListItem.Subtitle>
+                  <ListItem.Subtitle>
+                    Weight (kg.): {pet.petWeight}
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+                <ListItem.Chevron />
+              </ListItem>
+            );
+          })}
           {/* <TouchableOpacity
             onPress={() => {
               navigation.navigate("PetInfo");
@@ -108,21 +110,15 @@ export const PetsProfile_user = ({ navigation }) => {
           >
             {}
           </TouchableOpacity> */}
-          
-          </ScrollView>
-        </View>
-      
+        </ScrollView>
+      </View>
     );
   }
-
-  
 };
 
 const styles = StyleSheet.create({
-  container: {
-   
-  },
-  body: { 
+  container: {},
+  body: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
