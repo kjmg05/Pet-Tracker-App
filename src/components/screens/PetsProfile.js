@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -11,11 +11,14 @@ import {
 } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import theme from "../../theme";
-import firebase from "../database/firebase";
+import firebase from "../../firebase";
+import { Context as AuthContext } from "../../providers/AuthContext";
+import { Button } from "react-native-paper";
 
 const { width, height } = Dimensions.get("screen");
 
 export const PetsProfile_newUser = ({ navigation }) => {
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
@@ -29,6 +32,8 @@ export const PetsProfile_newUser = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.text}>Aqui va la imagen</Text>
       </View>
+
+      
     </SafeAreaView>
   );
 };
@@ -36,7 +41,7 @@ export const PetsProfile_newUser = ({ navigation }) => {
 export const PetsProfile_user = ({ navigation }) => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const { signout } = useContext(AuthContext);
   useEffect(() => {
     firebase.db.collection("pets").onSnapshot((querySnapshot) => {
       const pets = [];
@@ -66,6 +71,7 @@ export const PetsProfile_user = ({ navigation }) => {
     return (
       <View style={styles.body}>
         <ScrollView>
+        <Button onPress={signout}>Signout</Button>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("AddNewPet");
