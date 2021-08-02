@@ -13,7 +13,7 @@ function Home({ navigation }) {
 
   return (
     <View>
-      <Text>Welcome from home screen</Text>
+      {/* <Text>Welcome from home screen</Text>
       
       <TouchableOpacity onPress={() => {navigation.navigate("AddNewPet"); }} style={styles.buttonAdd}>
           <Text style={styles.text}>Add new pet 🐾</Text>
@@ -31,7 +31,7 @@ function Home({ navigation }) {
       </TouchableOpacity>
 
 
-      <Button onPress={signout}>Signout</Button>
+      <Button onPress={signout}>Signout</Button> */}
     </View>
   );
 }
