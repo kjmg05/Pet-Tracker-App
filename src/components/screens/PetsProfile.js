@@ -16,7 +16,35 @@ import { Context as AuthContext } from "../../providers/AuthContext";
 
 const { width, height } = Dimensions.get("screen");
 
-const PetsProfile = ({ navigation }) => {
+export const PetsProfile_newUser = ({ navigation }) => {
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.body}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("AddNewPet");
+          }}
+          style={styles.buttonAdd}
+        >
+          <Text style={styles.text}>Add new pet 🐾</Text>
+        </TouchableOpacity>
+        <View style={styles.viewLogo}>
+            <Image
+              style={styles.logo}
+              source={{
+                uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
+              }}
+            />
+          </View>
+      </View>
+
+      
+    </SafeAreaView>
+  );
+};
+
+export const PetsProfile = ({ navigation }) => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const { signout } = useContext(AuthContext);
@@ -89,14 +117,6 @@ const PetsProfile = ({ navigation }) => {
               );
             }
           })}
-          <View style={styles.viewLogo}>
-                <Image
-                  style={styles.logo}
-                  source={{
-                    uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
-                  }}
-                />
-              </View>
         </ScrollView>
         <TouchableOpacity onPress={signout} style={styles.buttonLogOut}>
           <Text style={styles.logOut}>Log out</Text>
@@ -156,4 +176,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PetsProfile;
+

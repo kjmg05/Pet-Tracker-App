@@ -16,7 +16,7 @@ import { Context as AuthContext } from "../../providers/AuthContext";
 const { width, height } = Dimensions.get("screen");
 
 const AddNewPet = ({ navigation }) => {
-  const {state} = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const [petState, setState] = useState({
     petOwner: "",
     petName: "",

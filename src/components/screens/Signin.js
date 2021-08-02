@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import SigninForm from "../forms/SigninForm";
 import theme from "../../theme";
 
-function Signin({ navigation }) {
+const Signin = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.viewLogo}>
@@ -22,7 +22,7 @@ function Signin({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

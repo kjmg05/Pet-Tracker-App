@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  ScrollView,
   Modal,
   Dimensions,
   TouchableOpacity,
@@ -20,64 +19,64 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.body}>
-          <MaterialIcons
-            style={styles.infoIcon}
-            name="info"
-            size={24}
-            onPress={() => setModalOpen(true)}
-            color="#fff"
-          />
-          <Image
-            style={styles.logo}
-            source={{
-              uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
-            }}
-          />
-          <Modal visible={modalOpen}>
-            <SafeAreaView style={styles.modal}>
-              <MaterialIcons
-                style={styles.closeIcon}
-                name="close"
-                size={24}
-                onPress={() => setModalOpen(false)}
-              />
-              <View>
-                <Text style={styles.modalTitle}>Pet Tracker App</Text>
-                <Text style={styles.modalText}>
-                  Is a pet health tracking app designed to help pet owners take
-                  the best care of their furry friend. Simply upload data of a
-                  pet as the breed, pet's weight, feeding schedule, and exercise
-                  activities and the app will provide a dashboard to track and
-                  display. We'll also help owner's go paperless to organize a
-                  pet's records. Pet Tracker App is the perfect tool for pet
-                  owner's to organize and track their pet's info all in one app.
-                </Text>
-                <Text style={styles.modalFooter}>DESING AND DEVELOP BY</Text>
-                <Text style={styles.modalFooterText}>
-                  DANIEL ARIAS AND KENIA MARTINEZ ⓒ 2021
-                </Text>
-              </View>
-            </SafeAreaView>
-          </Modal>
+      <View style={styles.body}>
+        <MaterialIcons
+          style={styles.infoIcon}
+          name="info"
+          size={24}
+          onPress={() => setModalOpen(true)}
+          color="#fff"
+        />
+        <Image
+          style={styles.logo}
+          source={{
+            uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
+          }}
+        />
+        <Modal visible={modalOpen}>
+          <SafeAreaView style={styles.modal}>
+            <MaterialIcons
+              style={styles.closeIcon}
+              name="close"
+              size={24}
+              onPress={() => setModalOpen(false)}
+            />
+            <View>
+              <Text style={styles.modalTitle}>Pet Tracker App</Text>
+              <Text style={styles.modalText}>
+                Is a pet health tracking app designed to help pet owners take
+                the best care of their furry friend. Simply upload data of a pet
+                as the breed, pet's weight, feeding schedule, and exercise
+                activities and the app will provide a dashboard to track and
+                display. We'll also help owner's go paperless to organize a
+                pet's records. Pet Tracker App is the perfect tool for pet
+                owner's to organize and track their pet's info all in one app.
+              </Text>
+              <Text style={styles.modalFooter}>DESING AND DEVELOP BY</Text>
+              <Text style={styles.modalFooterText}>
+                DANIEL ARIAS AND KENIA MARTINEZ ⓒ 2021
+              </Text>
+            </View>
+          </SafeAreaView>
+        </Modal>
 
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Signin");
-            }}
-            style={styles.buttonLogin}
-          >
-            <Text style={styles.text}>Log in</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Signup");
-            }}
-            style={styles.buttonSignin}
-          >
-            <Text style={styles.text}>Sign up</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Signin");
+          }}
+          style={styles.buttonLogin}
+        >
+          <Text style={styles.text}>Log in</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Signup");
+          }}
+          style={styles.buttonSignin}
+        >
+          <Text style={styles.text}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

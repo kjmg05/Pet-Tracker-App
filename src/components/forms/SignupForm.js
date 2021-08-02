@@ -5,7 +5,7 @@ import { Context as AuthContext } from "../../providers/AuthContext";
 import { validate } from "email-validator";
 import theme from "../../theme";
 
-function SignupForm({ navigation }) {
+const SignupForm = ({ navigation }) => {
   const { state, signup } = useContext(AuthContext);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
@@ -18,10 +18,12 @@ function SignupForm({ navigation }) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (state.registered) navigation.navigate("PetsProfile");
+    if (state.registered) {
+      navigation.navigate("PetsProfile_newUser");
+    }
   }, [state.registered]);
 
-  function handleVerify(input) {
+  const handleVerify = (input) => {
     if (input === "fullname") {
       if (!fullname) setFullnameError(true);
       else setFullnameError(false);
@@ -55,7 +57,7 @@ function SignupForm({ navigation }) {
         }
       } else setError("All fields are required!");
     }
-  }
+  };
 
   return (
     <View>
@@ -112,7 +114,7 @@ function SignupForm({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   buttonSignin: {

@@ -9,7 +9,7 @@ import Signup from "../screens/Signup";
 import Home from "../screens/Home";
 import PetInfo from "../screens/PetInfo";
 import AddNewPet from "../screens/AddNewPet";
-import PetsProfile from "../screens/PetsProfile";
+import {PetsProfile, PetsProfile_newUser} from "../screens/PetsProfile";
 import theme from "../../theme";
 const Stack = createStackNavigator();
 
@@ -34,19 +34,25 @@ const Navigation = () => {
                 name="PetsProfile"
                 component={PetsProfile}
                 style={styles.text}
-                options={{ title: 'Pets Profile' }}
+                options={{ title: "Pets Profile" }}
+              />
+              <Stack.Screen
+                name="PetsProfile_newUser"
+                component={PetsProfile_newUser}
+                style={styles.text}
+                options={{ title: "Pets Profile" }}
               />
               <Stack.Screen
                 name="PetInfo"
                 component={PetInfo}
                 style={styles.text}
-                options={{ title: 'Pet information' }}
+                options={{ title: "Pet information" }}
               />
               <Stack.Screen
                 name="AddNewPet"
                 component={AddNewPet}
                 style={styles.text}
-                options={{ title: 'Add new pet' }}
+                options={{ title: "Add new pet" }}
               />
             </Stack.Navigator>
           ) : (
@@ -59,13 +65,13 @@ const Navigation = () => {
               />
               <Stack.Screen
                 name="Signin"
-                options={{ title: 'Log in' }}
+                options={{ title: "Log in" }}
                 component={Signin}
                 style={styles.text}
               />
               <Stack.Screen
                 name="Signup"
-                options={{ title: 'Sign Up' }}
+                options={{ title: "Sign Up" }}
                 component={Signup}
                 style={styles.text}
               />

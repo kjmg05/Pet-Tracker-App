@@ -87,18 +87,14 @@ const PetInfo = ({ navigation, route }) => {
   };
 
   const popUpUpdate = () => {
-    Alert.alert(
-      "Pet Tracker App",
-      "Your pet profile has been updated!",
-      [
-        {
-          text: "Ok",
-          onPress: () => {
-            updatePet(), navigation.navigate("PetsProfile");
-          },
+    Alert.alert("Pet Tracker App", "Your pet profile has been updated!", [
+      {
+        text: "Ok",
+        onPress: () => {
+          updatePet(), navigation.navigate("PetsProfile");
         },
-      ]
-    );
+      },
+    ]);
   };
 
   if (loading) {
