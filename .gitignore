@@ -12,5 +12,5 @@ web-build/
 # macOS
 .DS_Store
 
-# The file containing environment variables or database
-/database
+# environment variables and keys
+# environment.js

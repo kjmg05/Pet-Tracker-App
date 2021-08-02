@@ -10,7 +10,7 @@ import {
   TextInput,
 } from "react-native";
 import theme from "../../theme";
-import firebase from "../database/firebase";
+import firebase from "../../firebase";
 
 const { width, height } = Dimensions.get("screen");
 
