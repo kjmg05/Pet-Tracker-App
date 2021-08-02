@@ -9,7 +9,7 @@ import Signup from "../screens/Signup";
 import Home from "../screens/Home";
 import PetInfo from "../screens/PetInfo";
 import AddNewPet from "../screens/AddNewPet";
-import {PetsProfile, PetsProfile_newUser} from "../screens/PetsProfile";
+import PetsProfile from "../screens/PetsProfile";
 import theme from "../../theme";
 const Stack = createStackNavigator();
 
@@ -33,12 +33,6 @@ const Navigation = () => {
               <Stack.Screen
                 name="PetsProfile"
                 component={PetsProfile}
-                style={styles.text}
-                options={{ title: "Pets Profile" }}
-              />
-              <Stack.Screen
-                name="PetsProfile_newUser"
-                component={PetsProfile_newUser}
                 style={styles.text}
                 options={{ title: "Pets Profile" }}
               />

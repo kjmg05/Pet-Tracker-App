@@ -46,7 +46,6 @@ const AddNewPet = ({ navigation }) => {
         },
       ]);
     } else {
-      console.log(petState);
       await firebase.db.collection("pets").add({
         petOwner: state.user.id,
         petName: petState.petName,

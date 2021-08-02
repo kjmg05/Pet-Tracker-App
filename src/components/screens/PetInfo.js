@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -12,22 +12,23 @@ import {
 } from "react-native";
 import theme from "../../theme";
 import firebase from "../../firebase";
+import { Context as AuthContext } from "../../providers/AuthContext";
 
 const { width, height } = Dimensions.get("screen");
 
 const PetInfo = ({ navigation, route }) => {
+  const { state } = useContext(AuthContext);
   const initialState = {
     id: "",
     petName: "",
     petBreed: "",
     petAge: "",
     petWeight: "",
+    petOwner: "",
   };
   const petId = route.params.petId;
   const [pet, setPet] = useState();
   const [loading, setLoading] = useState(true);
-
-  // console.log(petId);
 
   const getPetById = async (id) => {
     const dbRef = firebase.db.collection("pets").doc(id);
@@ -81,6 +82,7 @@ const PetInfo = ({ navigation, route }) => {
       petBreed: pet.petBreed,
       petAge: pet.petAge,
       petWeight: pet.petWeight,
+      petOwner: state.user.id,
     });
     setPet(initialState);
     navigation.navigate("PetsProfile");

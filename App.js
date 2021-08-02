@@ -14,12 +14,11 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style={styles.nav} />
       <AuthProvider>
-      <PaperProvider>
-        <Navigation />
-      </PaperProvider>
-    </AuthProvider>
+        <PaperProvider>
+          <Navigation />
+        </PaperProvider>
+      </AuthProvider>
     </SafeAreaView>
- 
   );
 }
 
@@ -30,4 +29,5 @@ const styles = StyleSheet.create({
   nav: {
     backgroundColor: theme.colors.dark,
   },
+  keyboard: {},
 });

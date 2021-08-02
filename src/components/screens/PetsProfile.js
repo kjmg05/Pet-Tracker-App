@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
-  Image,
   Dimensions,
 } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
@@ -16,35 +15,7 @@ import { Context as AuthContext } from "../../providers/AuthContext";
 
 const { width, height } = Dimensions.get("screen");
 
-export const PetsProfile_newUser = ({ navigation }) => {
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.body}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("AddNewPet");
-          }}
-          style={styles.buttonAdd}
-        >
-          <Text style={styles.text}>Add new pet 🐾</Text>
-        </TouchableOpacity>
-        <View style={styles.viewLogo}>
-            <Image
-              style={styles.logo}
-              source={{
-                uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
-              }}
-            />
-          </View>
-      </View>
-
-      
-    </SafeAreaView>
-  );
-};
-
-export const PetsProfile = ({ navigation }) => {
+const PetsProfile = ({ navigation }) => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const { signout } = useContext(AuthContext);
@@ -176,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
+export default PetsProfile;

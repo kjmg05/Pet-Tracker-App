@@ -19,7 +19,7 @@ const SignupForm = ({ navigation }) => {
 
   useEffect(() => {
     if (state.registered) {
-      navigation.navigate("PetsProfile_newUser");
+      //navigation.navigate("PetsProfile");
     }
   }, [state.registered]);
 
@@ -117,6 +117,9 @@ const SignupForm = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  keyboard: {
+    flex: 1,
+  },
   buttonSignin: {
     width: 300,
     height: 40,
