@@ -33,7 +33,6 @@ const PetInfo = ({ navigation, route }) => {
     const dbRef = firebase.db.collection("pets").doc(id);
     const petData = await dbRef.get();
     const pet = petData.data();
-    // console.log(pet);
     setPet({
       ...pet,
       id: petData,
@@ -62,13 +61,13 @@ const PetInfo = ({ navigation, route }) => {
         {
           text: "Ok",
           onPress: () => {
-            deletePet(), navigation.navigate("PetsProfile_user");
+            deletePet(), navigation.navigate("PetsProfile");
           },
         },
         {
           text: "Cancel",
           onPress: () => {
-            navigation.navigate("PetsProfile_user");
+            navigation.navigate("PetsProfile");
           },
         },
       ]
@@ -84,22 +83,18 @@ const PetInfo = ({ navigation, route }) => {
       petWeight: pet.petWeight,
     });
     setPet(initialState);
-    navigation.navigate("PetsProfile_user");
+    navigation.navigate("PetsProfile");
   };
 
   const popUpUpdate = () => {
-    Alert.alert(
-      "Pet Tracker App",
-      "Your pet profile has been updated!",
-      [
-        {
-          text: "Ok",
-          onPress: () => {
-            updatePet(), navigation.navigate("PetsProfile_user");
-          },
+    Alert.alert("Pet Tracker App", "Your pet profile has been updated!", [
+      {
+        text: "Ok",
+        onPress: () => {
+          updatePet(), navigation.navigate("PetsProfile");
         },
-      ]
-    );
+      },
+    ]);
   };
 
   if (loading) {
