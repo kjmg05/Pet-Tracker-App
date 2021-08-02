@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
 import { Text } from "react-native-paper";
 import theme from "../../theme";
 import SignupForm from "../forms/SignupForm";
@@ -7,10 +7,18 @@ import SignupForm from "../forms/SignupForm";
 function Signup({ navigation }) {
   return (
     <View style={styles.container}>
+      <View style={styles.viewLogo}>
+        <Image
+          style={styles.logo}
+          source={{
+            uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
+          }}
+        />
+      </View>
       <SignupForm />
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
         <Text>
-          Already got an account? <Text style={styles.signin}>Sign in</Text>
+          Already have an account? <Text style={styles.signin}>Log In</Text>
         </Text>
       </TouchableOpacity>
     </View>
@@ -20,12 +28,18 @@ function Signup({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     padding: 10,
     backgroundColor: theme.colors.backgroundWhite,
   },
   signin: {
-    color: theme.colors.primary,
+    color: theme.colors.darkBlue,
+  },
+  viewLogo: {
+    alignItems: "center",
+  },
+  logo: {
+    width: 250,
+    height: 250,
   },
 });
 

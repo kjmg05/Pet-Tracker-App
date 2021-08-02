@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import theme from "./src/theme";
 import Navigation from "./src/components/navigation";
@@ -10,10 +11,23 @@ export default function App() {
   LongTimers();
 
   return (
-    <AuthProvider>
-      <PaperProvider theme={theme}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style={styles.nav} />
+      <AuthProvider>
+      <PaperProvider>
         <Navigation />
       </PaperProvider>
     </AuthProvider>
+    </SafeAreaView>
+ 
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  nav: {
+    backgroundColor: theme.colors.dark,
+  },
+});
