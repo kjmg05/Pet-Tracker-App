@@ -18,6 +18,7 @@ const Home = ({ navigation }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
+<<<<<<< HEAD
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
         <MaterialIcons
@@ -59,6 +60,31 @@ const Home = ({ navigation }) => {
             </View>
           </SafeAreaView>
         </Modal>
+=======
+    <View>
+      {/* <Text>Welcome from home screen</Text>
+      
+      <TouchableOpacity onPress={() => {navigation.navigate("AddNewPet"); }} style={styles.buttonAdd}>
+          <Text style={styles.text}>Add new pet 🐾</Text>
+      </TouchableOpacity>
+     
+      <TouchableOpacity onPress={() => {navigation.navigate("PetsProfile_user"); }} style={styles.buttonAdd}>
+          <Text style={styles.text}>profile 🐾</Text>
+      </TouchableOpacity>
+
+
+      <TouchableOpacity onPress={() => navigation.navigate("AddNewPet")}>
+        <Text>
+          Don't have an account? <Text style={styles.signup}>AddNewPet</Text>
+        </Text>
+      </TouchableOpacity>
+
+
+      <Button onPress={signout}>Signout</Button> */}
+    </View>
+  );
+}
+>>>>>>> 466bf6f083f84ac5e6a868b9bddf09c3046d7406
 
         <TouchableOpacity
           onPress={() => {

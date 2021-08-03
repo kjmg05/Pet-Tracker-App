@@ -4,22 +4,36 @@
     "slug": "Pet-Tracker-App",
     "version": "1.0.0",
     "orientation": "portrait",
+<<<<<<< HEAD
     "icon": "./assets/img/petTracker.png",
     "splash": {
       "image": "./assets/img/petTracker.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
+=======
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+>>>>>>> 466bf6f083f84ac5e6a868b9bddf09c3046d7406
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
+<<<<<<< HEAD
         "foregroundImage": "./assets/img/petTracker.png",
+=======
+        "foregroundImage": "./assets/adaptive-icon.png",
+>>>>>>> 466bf6f083f84ac5e6a868b9bddf09c3046d7406
         "backgroundColor": "#FFFFFF"
       }
     },
