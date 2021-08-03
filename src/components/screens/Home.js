@@ -41,7 +41,8 @@ const Home = ({ navigation }) => {
               size={24}
               onPress={() => setModalOpen(false)}
             />
-            <View>
+            <View  style={styles.body}>
+          
               <Text style={styles.modalTitle}>Pet Tracker App</Text>
               <Text style={styles.modalText}>
                 Is a pet health tracking app designed to help pet owners take
@@ -56,6 +57,12 @@ const Home = ({ navigation }) => {
               <Text style={styles.modalFooterText}>
                 DANIEL ARIAS AND KENIA MARTINEZ ⓒ 2021
               </Text>
+              <Image
+          style={styles.logo2}
+          source={{
+            uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
+          }}
+        />
             </View>
           </SafeAreaView>
         </Modal>
@@ -93,6 +100,11 @@ const styles = StyleSheet.create({
   logo: {
     width: 350,
     height: 350,
+  },
+  logo2: {
+    width: 250,
+    height: 250,
+   
   },
   text: {
     textAlign: "center",
@@ -159,6 +171,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     borderWidth: 2,
+    backgroundColor: theme.colors.darkBlue,
     borderColor: theme.colors.darkBlue,
     elevation: 15,
     marginTop: 20,

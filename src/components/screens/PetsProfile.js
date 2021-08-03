@@ -130,20 +130,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonLogOut: {
-    width: 300,
+    width: 120,
     height: 40,
     backgroundColor: theme.colors.lightBlue,
-    borderRadius: 5,
+    borderRadius: 55,
     elevation: 15,
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,
+   
+
   },
   logOut: {
     textAlign: "center",
     fontSize: 20,
     color: theme.colors.dark,
+   
   },
 });
 
