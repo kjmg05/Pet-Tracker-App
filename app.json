@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "taskily-app",
-    "slug": "taskily-app",
+    "name": "Pet-Tracker-App",
+    "slug": "Pet-Tracker-App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Taskily-logo.png",
+    "icon": "./assets/img/petTracker.png",
     "splash": {
-      "image": "./assets/Taskily-logo.png",
+      "image": "./assets/img/petTracker.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FBFBFB"
+      "backgroundColor": "#FFFFFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/Taskily-logo-square.png",
-        "backgroundColor": "#FBFBFB"
+        "foregroundImage": "./assets/img/petTracker.png",
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/img/petTracker.png"
     }
   }
 }

@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Button, Caption, Text, TextInput } from "react-native-paper";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Caption, Text, TextInput } from "react-native-paper";
 import { Context as AuthContext } from "../../providers/AuthContext";
 import { validate } from "email-validator";
+import theme from "../../theme";
 
-function SignupForm({ navigation }) {
+const SignupForm = ({ navigation }) => {
   const { state, signup } = useContext(AuthContext);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
@@ -16,12 +17,13 @@ function SignupForm({ navigation }) {
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [error, setError] = useState(false);
 
-  // Verificar si el usuario se registra en la app
   useEffect(() => {
-    if (state.registered) navigation.navigate("Home");
+    if (state.registered) {
+      //navigation.navigate("PetsProfile");
+    }
   }, [state.registered]);
 
-  function handleVerify(input) {
+  const handleVerify = (input) => {
     if (input === "fullname") {
       if (!fullname) setFullnameError(true);
       else setFullnameError(false);
@@ -55,7 +57,7 @@ function SignupForm({ navigation }) {
         }
       } else setError("All fields are required!");
     }
-  }
+  };
 
   return (
     <View>
@@ -102,21 +104,37 @@ function SignupForm({ navigation }) {
       {confirmPasswordError && (
         <Caption>Please enter your password confirmation</Caption>
       )}
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => handleVerify("signup")}
+      <TouchableOpacity
+        onPress={() => {
+          handleVerify("signup");
+        }}
+        style={styles.buttonSignin}
       >
-        Create account
-      </Button>
+        <Text style={styles.text}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  button: {
+  keyboard: {
+    flex: 1,
+  },
+  buttonSignin: {
+    width: 300,
+    height: 40,
+    backgroundColor: theme.colors.lightBlue,
+    borderRadius: 5,
+    elevation: 15,
     marginTop: 20,
-    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 20,
+    color: theme.colors.dark,
   },
 });
 

@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, View } from "react-native";
-import { Button, Caption, Text, TextInput } from "react-native-paper";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Caption, Text, TextInput } from "react-native-paper";
 import { Context as AuthContext } from "../../providers/AuthContext";
+import theme from "../../theme";
 
-function SigninForm() {
+const SigninForm = () => {
   const { state, signin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [error, setError] = useState("");
 
-  function handleVerify(input) {
+  const handleVerify = (input) => {
     if (input === "email") {
       if (!email) setEmailError(true);
       else setEmailError(false);
@@ -23,11 +23,10 @@ function SigninForm() {
         signin(email, password);
       }
     }
-  }
+  };
 
   return (
     <View>
-      {state.errorMessage != null && <Text>{state.errorMessage}</Text>}
       <TextInput
         mode="outlined"
         label="Email"
@@ -36,9 +35,7 @@ function SigninForm() {
         value={email}
         onBlur={() => handleVerify("email")}
       />
-      {emailError && (
-        <Caption>Por favor ingresa tu cuenta de correo electrónico</Caption>
-      )}
+      {emailError && <Caption>Please enter your e-mail address.</Caption>}
       <TextInput
         mode="outlined"
         label="Password"
@@ -48,22 +45,35 @@ function SigninForm() {
         value={password}
         onBlur={() => handleVerify("password")}
       />
-      {passwordError && <Caption>Por favor ingresa tu contraseña</Caption>}
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => handleVerify("signin")}
+      {passwordError && <Caption>Please enter your password.</Caption>}
+      <TouchableOpacity
+        onPress={() => {
+          handleVerify("signin");
+        }}
+        style={styles.buttonLogin}
       >
-        Signin
-      </Button>
+        <Text style={styles.text}>Log In</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  button: {
+  buttonLogin: {
+    width: 300,
+    height: 40,
+    backgroundColor: theme.colors.lightBlue,
+    borderRadius: 5,
+    elevation: 15,
     marginTop: 20,
-    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 20,
+    color: theme.colors.dark,
   },
 });
 

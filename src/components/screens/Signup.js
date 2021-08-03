@@ -1,31 +1,53 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  ScrollView,
+} from "react-native";
 import { Text } from "react-native-paper";
 import theme from "../../theme";
 import SignupForm from "../forms/SignupForm";
 
-function Signup({ navigation }) {
+const Signup = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <SignupForm />
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>
-          Already got an account? <Text style={styles.signin}>Sign in</Text>
-        </Text>
-      </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.viewLogo}>
+          <Image
+            style={styles.logo}
+            source={{
+              uri: "https://raw.githubusercontent.com/kjmg05/Pet-Tracker-App/devBranch/assets/img/petTracker.png",
+            }}
+          />
+        </View>
+        <SignupForm />
+        <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
+          <Text>
+            Already have an account? <Text style={styles.signin}>Log In</Text>
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     padding: 10,
     backgroundColor: theme.colors.backgroundWhite,
   },
   signin: {
-    color: theme.colors.primary,
+    color: theme.colors.darkBlue,
+  },
+  viewLogo: {
+    alignItems: "center",
+  },
+  logo: {
+    width: 250,
+    height: 250,
   },
 });
 
