@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "icon": "./assets/img/petTracker.png",
     "splash": {
       "image": "./assets/img/petTracker.png",
@@ -12,28 +13,37 @@
       "backgroundColor": "#FFFFFF"
 =======
     "icon": "./assets/icon.png",
+=======
+    "icon": "./assets/img/petTracker.png",
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/img/petTracker.png",
       "resizeMode": "contain",
+<<<<<<< HEAD
       "backgroundColor": "#ffffff"
 >>>>>>> 466bf6f083f84ac5e6a868b9bddf09c3046d7406
+=======
+      "backgroundColor": "#FFFFFF"
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "foregroundImage": "./assets/img/petTracker.png",
 =======
         "foregroundImage": "./assets/adaptive-icon.png",
 >>>>>>> 466bf6f083f84ac5e6a868b9bddf09c3046d7406
+=======
+        "foregroundImage": "./assets/img/petTracker.png",
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
         "backgroundColor": "#FFFFFF"
       }
     },

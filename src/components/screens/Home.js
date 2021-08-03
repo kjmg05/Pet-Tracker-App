@@ -19,6 +19,9 @@ const Home = ({ navigation }) => {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
         <MaterialIcons
@@ -60,6 +63,7 @@ const Home = ({ navigation }) => {
             </View>
           </SafeAreaView>
         </Modal>
+<<<<<<< HEAD
 =======
     <View>
       {/* <Text>Welcome from home screen</Text>
@@ -78,11 +82,29 @@ const Home = ({ navigation }) => {
           Don't have an account? <Text style={styles.signup}>AddNewPet</Text>
         </Text>
       </TouchableOpacity>
+=======
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
 
-
-      <Button onPress={signout}>Signout</Button> */}
-    </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Signin");
+          }}
+          style={styles.buttonLogin}
+        >
+          <Text style={styles.text}>Log in</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Signup");
+          }}
+          style={styles.buttonSignin}
+        >
+          <Text style={styles.text}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
+<<<<<<< HEAD
 }
 >>>>>>> 466bf6f083f84ac5e6a868b9bddf09c3046d7406
 
@@ -111,6 +133,10 @@ const Home = ({ navigation }) => {
   );
 };
 
+=======
+};
+
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -190,7 +216,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
     borderColor: theme.colors.darkBlue,
+<<<<<<< HEAD
     backgroundColor: theme.colors.darkBlue,
+=======
+>>>>>>> 5162a5247b9aaba41d97ad6e7d3fcea7caab7289
     elevation: 15,
     marginTop: 20,
     justifyContent: "center",
