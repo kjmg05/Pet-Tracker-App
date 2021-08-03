@@ -12,7 +12,6 @@ const {
   appId,
 } = getEnvVars();
 
-// Pasar los valores de las keys a Firebase
 const firebaseConfig = {
   apiKey,
   authDomain,
@@ -22,14 +21,13 @@ const firebaseConfig = {
   appId,
 };
 
-// Iniciar la conexión a firebase si no se ha realizado previamente
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 export { firebase };
 
 const db = firebase.firestore();
 
-  export default {
-      firebase,
-      db,
-  };
+export default {
+  firebase,
+  db,
+};

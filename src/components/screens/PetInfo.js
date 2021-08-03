@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -12,28 +12,28 @@ import {
 } from "react-native";
 import theme from "../../theme";
 import firebase from "../../firebase";
+import { Context as AuthContext } from "../../providers/AuthContext";
 
 const { width, height } = Dimensions.get("screen");
 
 const PetInfo = ({ navigation, route }) => {
+  const { state } = useContext(AuthContext);
   const initialState = {
     id: "",
     petName: "",
     petBreed: "",
     petAge: "",
     petWeight: "",
+    petOwner: "",
   };
   const petId = route.params.petId;
   const [pet, setPet] = useState();
   const [loading, setLoading] = useState(true);
 
-  // console.log(petId);
-
   const getPetById = async (id) => {
     const dbRef = firebase.db.collection("pets").doc(id);
     const petData = await dbRef.get();
     const pet = petData.data();
-    // console.log(pet);
     setPet({
       ...pet,
       id: petData,
@@ -62,13 +62,13 @@ const PetInfo = ({ navigation, route }) => {
         {
           text: "Ok",
           onPress: () => {
-            deletePet(), navigation.navigate("PetsProfile_user");
+            deletePet(), navigation.navigate("PetsProfile");
           },
         },
         {
           text: "Cancel",
           onPress: () => {
-            navigation.navigate("PetsProfile_user");
+            navigation.navigate("PetsProfile");
           },
         },
       ]
@@ -82,24 +82,21 @@ const PetInfo = ({ navigation, route }) => {
       petBreed: pet.petBreed,
       petAge: pet.petAge,
       petWeight: pet.petWeight,
+      petOwner: state.user.id,
     });
     setPet(initialState);
-    navigation.navigate("PetsProfile_user");
+    navigation.navigate("PetsProfile");
   };
 
   const popUpUpdate = () => {
-    Alert.alert(
-      "Pet Tracker App",
-      "Your pet profile has been updated!",
-      [
-        {
-          text: "Ok",
-          onPress: () => {
-            updatePet(), navigation.navigate("PetsProfile_user");
-          },
+    Alert.alert("Pet Tracker App", "Your pet profile has been updated!", [
+      {
+        text: "Ok",
+        onPress: () => {
+          updatePet(), navigation.navigate("PetsProfile");
         },
-      ]
-    );
+      },
+    ]);
   };
 
   if (loading) {
